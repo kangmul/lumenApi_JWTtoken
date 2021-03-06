@@ -15,13 +15,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 {
     use Authenticatable, Authorizable, HasFactory;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'username', 'email', 'password', 'is_active', 'npp', 'created_at', 'updated_at', 'created_by'
     ];
 
     /**
@@ -32,6 +34,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public $timestamps = true;
+    protected $connection = 'pgsql';
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
